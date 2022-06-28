@@ -4,6 +4,7 @@ import com.jaredgood.springrecipeapp.domain.*;
 import com.jaredgood.springrecipeapp.repositories.CategoryRepository;
 import com.jaredgood.springrecipeapp.repositories.RecipeRepository;
 import com.jaredgood.springrecipeapp.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoryRepository categoryRepository;
@@ -34,28 +36,29 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         List<Recipe> recipes = new ArrayList<>(2);
         Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByDescription("Each");
         if(!eachUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
         Optional<UnitOfMeasure> tableSpoonUomOptional = unitOfMeasureRepository.findByDescription("Tablespoon");
         if(!tableSpoonUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
         Optional<UnitOfMeasure> teaSpoonUomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
         if(!teaSpoonUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
         Optional<UnitOfMeasure> dashUomOptional = unitOfMeasureRepository.findByDescription("Dash");
         if(!dashUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
         Optional<UnitOfMeasure> pintUomOptional = unitOfMeasureRepository.findByDescription("Pint");
         if(!pintUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
         Optional<UnitOfMeasure> cupUomOptional = unitOfMeasureRepository.findByDescription("Cup");
         if(!cupUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throwRuntimeError("Expected UOM Not Found");
         }
+
         UnitOfMeasure eachUom = eachUomOptional.get();
         UnitOfMeasure tableSpoonUom = tableSpoonUomOptional.get();
         UnitOfMeasure teaspoonUom = teaSpoonUomOptional.get();
@@ -63,16 +66,21 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure pintUom = pintUomOptional.get();
         UnitOfMeasure cupsUom = cupUomOptional.get();
 
+        log.debug("All Units of Measure loaded.");
+
+
         Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
         if(!americanCategoryOptional.isPresent()){
-            throw new RuntimeException("Expected Category Not Found");
+            throwRuntimeError("Expected Category Not Found");
         }
         Optional<Category> mexicanCategoryOptional = categoryRepository.findByDescription("Mexican");
         if(!mexicanCategoryOptional.isPresent()){
-            throw new RuntimeException("Expected Category Not Found");
+            throwRuntimeError("Expected Category Not Found");
         }
         Category americanCategory = americanCategoryOptional.get();
         Category mexicanCategory = mexicanCategoryOptional.get();
+
+        log.debug("Categories Loaded");
 
         Recipe guacRecipe = new Recipe();
         guacRecipe.setDescription("Perfect Guacamole");
@@ -115,6 +123,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.getCategories().add(mexicanCategory);
 
         recipes.add(guacRecipe);
+
+        log.debug(String.valueOf(recipes));
 
         Recipe tacosRecipe = new Recipe();
         tacosRecipe.setDescription("Spicy Grilled Chicken Tacos");
@@ -165,6 +175,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.getCategories().add(mexicanCategory);
         recipes.add(tacosRecipe);
 
+        log.debug(String.valueOf(recipes));
         return recipes;
+    }
+
+    private RuntimeException throwRuntimeError(String message){
+        log.error(message);
+        throw new RuntimeException(message);
     }
 }

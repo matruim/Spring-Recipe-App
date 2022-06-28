@@ -15,5 +15,4 @@ public class Notes {
     private Recipe recipe;
     @Lob
     private String recipeNotes;
-
 }
