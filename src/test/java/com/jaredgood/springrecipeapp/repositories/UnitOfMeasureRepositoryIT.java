@@ -36,4 +36,11 @@ class UnitOfMeasureRepositoryIT {
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(uomValue);
         assertEquals(uomValue, uomOptional.get().getDescription());
     }
+
+    @Test
+    void findByDescriptionTablespoon(){
+        String uomValue = "Tablespoon";
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription(uomValue);
+        assertEquals(uomValue, uomOptional.get().getDescription());
+    }
 }
