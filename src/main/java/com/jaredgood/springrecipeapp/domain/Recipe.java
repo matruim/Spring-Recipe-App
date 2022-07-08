@@ -38,6 +38,7 @@ public class Recipe {
 
 
     public void setNotes(Notes notes) {
+        if(notes == null) return;
         notes.setRecipe(this);
         this.notes = notes;
     }
