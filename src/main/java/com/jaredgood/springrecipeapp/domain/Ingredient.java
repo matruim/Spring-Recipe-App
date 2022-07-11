@@ -33,6 +33,6 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
-        this.recipe =  recipe;
+        this.recipe = recipe;
     }
 }

@@ -36,13 +36,13 @@
                     </div>
                     <div class="row">
                         <div class="col-3"><h5>Prep Time:</h5></div>
-                        <div class="col-3"><p th:text="${recipe.getPrepTime()}">30 min</p></div>
+                        <div class="col-3"><p th:text="${recipe.getPrepTime() +  '  Min'}">30 min</p></div>
                         <div class="col-3">Difficulty:</div>
                         <div class="col-3"><p th:text="${recipe.getDifficulty()}">Easy</p></div>
                     </div>
                     <div class="row">
                         <div class="col-3"><h5>Cook Time:</h5></div>
-                        <div class="col-3"><p th:text="${recipe.getCookTime()}">30 min</p></div>
+                        <div class="col-3"><p th:text="${recipe.getCookTime() +  '  Min'}">30 min</p></div>
                         <div class="col-3">Servings:</div>
                         <div class="col-3"><p th:text="${recipe.getServings()}">4</p></div>
                     </div>

@@ -46,13 +46,13 @@ class IndexControllerTest {
     }
 
     @Test
-    void getIndexPage() {
+    void getIndexPage() throws Exception {
         //given
         Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());
 
         Recipe recipe = new Recipe();
-        recipe.setId(4l);
+        recipe.setId(1L);
 
         recipes.add(recipe);
 

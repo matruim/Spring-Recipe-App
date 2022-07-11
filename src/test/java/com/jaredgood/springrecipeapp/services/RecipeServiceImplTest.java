@@ -56,4 +56,11 @@ class RecipeServiceImplTest {
         assertEquals(recipeSet.size(), 1);
         verify(recipeRepository, times(1)).findAll();
     }
+
+    @Test
+    void testDeleteById() throws Exception{
+        long idToDelete = Long.valueOf(2L);
+        recipeService.deleteById(idToDelete);
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
 }
