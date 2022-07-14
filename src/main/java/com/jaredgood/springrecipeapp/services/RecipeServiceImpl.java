@@ -46,6 +46,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public RecipeCommand findCommandById(long id) {
+        return recipeToRecipeCommand.convert(findById(id));
+    }
+
+    @Override
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand command) {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
@@ -56,13 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @Transactional
-    public RecipeCommand findCommandById(long id) {
-        return recipeToRecipeCommand.convert(findById(id));
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        recipeRepository.deleteById(id);
+    public void deleteById(Long idToDelete) {
+        recipeRepository.deleteById(idToDelete);
     }
 }

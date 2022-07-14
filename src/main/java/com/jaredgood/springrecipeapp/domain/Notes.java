@@ -1,14 +1,12 @@
 package com.jaredgood.springrecipeapp.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
-@ToString(exclude = "recipe")
+@Getter
+@Setter
 @Entity
 public class Notes {
 

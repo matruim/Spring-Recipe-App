@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith({MockitoExtension.class, SpringExtension.class})
 @SpringBootTest
-class RecipeServiceTest {
+class RecipeServiceIT {
     public static final String NEW_DESCRIPTION = "New Description";
 
     @Autowired

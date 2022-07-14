@@ -9,14 +9,15 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
-    private final CategoryToCategoryCommand categoryConveter;
+public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
+
+    private final CategoryToCategoryCommand categoryConverter;
     private final IngredientToIngredientCommand ingredientConverter;
     private final NotesToNotesCommand notesConverter;
 
     public RecipeToRecipeCommand(CategoryToCategoryCommand categoryConveter, IngredientToIngredientCommand ingredientConverter,
                                  NotesToNotesCommand notesConverter) {
-        this.categoryConveter = categoryConveter;
+        this.categoryConverter = categoryConveter;
         this.ingredientConverter = ingredientConverter;
         this.notesConverter = notesConverter;
     }
@@ -39,11 +40,12 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
         command.setServings(source.getServings());
         command.setSource(source.getSource());
         command.setUrl(source.getUrl());
+        command.setImage(source.getImage());
         command.setNotes(notesConverter.convert(source.getNotes()));
 
         if (source.getCategories() != null && source.getCategories().size() > 0){
             source.getCategories()
-                    .forEach((Category category) -> command.getCategories().add(categoryConveter.convert(category)));
+                    .forEach((Category category) -> command.getCategories().add(categoryConverter.convert(category)));
         }
 
         if (source.getIngredients() != null && source.getIngredients().size() > 0){

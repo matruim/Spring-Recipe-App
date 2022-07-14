@@ -11,6 +11,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
+
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
@@ -22,7 +23,7 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     @Override
     public Set<UnitOfMeasureCommand> listAllUoms() {
         return StreamSupport.stream(unitOfMeasureRepository.findAll()
-                        .spliterator(), false)
+                .spliterator(), false)
                 .map(unitOfMeasureToUnitOfMeasureCommand::convert)
                 .collect(Collectors.toSet());
     }

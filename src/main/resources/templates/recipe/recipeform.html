@@ -17,7 +17,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row justify-content-center">
         <div class="col-6">
-            <form method="post" th:action="@{/recipe/}" th:object="${recipe}">
+            <form method="post" hx-post="/recipe" th:object="${recipe}">
                 <input class="form-control" th:field="*{id}" type="hidden"/>
                 <div class="card mb-3">
                     <div class="card-header text-white bg-primary">
@@ -52,7 +52,13 @@
                             </div>
                             <div class="col-3">
                                 <label>Difficulty:</label>
-                                <select class="form-control">
+                                <select class="form-control" th:field="*{difficulty}">
+                                    <option th:each="difficultyValue : ${T(com.jaredgood.springrecipeapp.domain.Difficulty).values()}"
+                                            th:value="${difficultyValue.name()}"
+                                            th:text="${difficultyValue.name()}"
+                                    >val</option>
+                                </select>
+                                <select class="form-control" th:remove="all">
                                     <option>Easy</option>
                                     <option>Medium</option>
                                     <option>Hard</option>

@@ -22,7 +22,7 @@
         <div class="col-6">
             <!-- /*@thymesVar id="ingredient" type="com.jaredgood.springrecipeapp.commands.IngredientCommand"*/-->
             <form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} " method="post">
-                <input class="form-control" th:field="*{id}" type="hidden"/>
+                <input  type="hidden" th:field="*{id}"/>
                 <div class="card mb-3">
                     <div class="card-header text-white bg-primary">
                         <h3 class="card-title">Edit Ingredient Information</h3>

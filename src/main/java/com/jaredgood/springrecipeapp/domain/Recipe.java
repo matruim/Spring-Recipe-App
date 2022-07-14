@@ -1,14 +1,17 @@
 package com.jaredgood.springrecipeapp.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +21,7 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
     @Lob
     private String directions;
     @Lob
@@ -38,9 +42,10 @@ public class Recipe {
 
 
     public void setNotes(Notes notes) {
-        if(notes == null) return;
-        notes.setRecipe(this);
-        this.notes = notes;
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public Recipe addIngredient(Ingredient ingredient){
